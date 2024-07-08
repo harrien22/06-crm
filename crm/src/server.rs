@@ -15,6 +15,7 @@ impl UserService for UserServer {
         println!("get_user: {:?}", input);
         Ok(Response::new(User::default()))
     }
+
     async fn create_user(
         &self,
         request: Request<CreateUserRequest>,
