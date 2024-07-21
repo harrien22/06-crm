@@ -1,5 +1,5 @@
 [workspace]
-members = ["crm", "user-stat"]
+members = ["crm", "crm-metadata", "crm-send", "user-stat"]
 resolver = "2"
 
 
@@ -10,7 +10,15 @@ prost = "0.12.6"
 prost-build = "0.12.6"
 prost-types = "0.12.6"
 serde = { version = "1.0.200", features = ["derive"] }
-sqlx = { version = "0.7.4", features = ["chrono", "runtime-tokio", "tls-rustls", "postgres"] }
+serde_yaml = "0.9.34"
+sqlx = { version = "0.7.4", features = [
+    "chrono",
+    "runtime-tokio",
+    "tls-rustls",
+    "postgres",
+] }
 tokio = { version = "1.38.0", features = ["rt", "rt-multi-thread", "macros"] }
 tonic = { version = "0.11.0", features = ["zstd", "tls"] }
 tonic-build = "0.11.0"
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
