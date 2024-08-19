@@ -11,7 +11,7 @@ impl Sender for SmsMessage {
         let message_id = self.message_id.clone();
         svc.sender.send(Msg::Sms(self)).await.map_err(|e| {
             warn!("Failed to send message: {:?}", e);
-            Status::internal("Failed to send sms")
+            Status::internal("Failed to send message")
         })?;
         Ok(SendResponse {
             message_id,
