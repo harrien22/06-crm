@@ -146,9 +146,9 @@ struct IntList(pub i32, pub i32, pub i32);
 impl Dummy<IntList> for Vec<i32> {
     fn dummy_with_rng<R: Rng + ?Sized>(v: &IntList, rng: &mut R) -> Vec<i32> {
         let (max, start, len) = (v.0, v.1, v.2);
-        let size = rng.gen_range(0..max);
+        let size = rng.random_range(0..max);
         (0..size)
-            .map(|_| rng.gen_range(start..start + len))
+            .map(|_| rng.random_range(start..start + len))
             .collect()
     }
 }

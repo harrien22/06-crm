@@ -6,7 +6,7 @@ fn main() -> Result<()> {
     let builder = tonic_build::configure();
     builder
         .out_dir("src/pb")
-        .compile(
+        .compile_protos(
             &[
                 "../protos/notification/messages.proto",
                 "../protos/notification/rpc.proto",

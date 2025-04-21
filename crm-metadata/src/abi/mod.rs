@@ -38,21 +38,21 @@ impl MetadataService {
 
 impl Content {
     pub fn materialize(id: u32) -> Self {
-        let mut rng = rand::thread_rng();
+        let mut rng = rand::rng();
         Content {
             id,
             name: Name().fake(),
             description: Sentence(3..7).fake(),
-            publishers: (1..rng.gen_range(2..10))
+            publishers: (1..rng.random_range(2..10))
                 .map(|_| Publisher::new())
                 .collect(),
             url: "https://placehold.co/1600x900".to_string(),
             image: "https://placehold.co/1600x900".to_string(),
             r#type: Faker.fake(),
             created_at: created_at(),
-            views: rng.gen_range(123432..10000000),
-            likes: rng.gen_range(1234..100000),
-            dislikes: rng.gen_range(123..10000),
+            views: rng.random_range(123432..10000000),
+            likes: rng.random_range(1234..100000),
+            dislikes: rng.random_range(123..10000),
         }
     }
 
@@ -63,7 +63,7 @@ impl Content {
 
 pub struct Tpl<'a>(pub &'a [Content]);
 
-impl<'a> Tpl<'a> {
+impl Tpl<'_> {
     pub fn to_body(&self) -> String {
         format!("Tpl: {:?}", self.0)
     }

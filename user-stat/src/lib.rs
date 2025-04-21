@@ -31,12 +31,12 @@ pub struct UserStatsServiceInner {
 #[async_trait]
 impl UserStats for UserStatsService {
     type QueryStream = ResponseStream;
-    type RawQueryStream = ResponseStream;
-
     async fn query(&self, request: Request<QueryRequest>) -> ServiceResult<Self::QueryStream> {
         let query = request.into_inner();
         self.query(query).await
     }
+
+    type RawQueryStream = ResponseStream;
 
     async fn raw_query(
         &self,
@@ -101,13 +101,13 @@ pub mod test_utils {
     pub async fn get_test_pool(url: Option<&str>) -> (TestPg, PgPool) {
         let url = match url {
             Some(url) => url.to_string(),
-            None => "postgres://postgres:password@localhost:5432".to_string(),
+            None => "postgres://postgres:postgres@localhost:5432".to_string(),
         };
         let p = Path::new(&env::var("CARGO_MANIFEST_DIR").unwrap()).join("migrations");
         let tdb = TestPg::new(url, p);
         let pool = tdb.get_pool().await;
 
-        // run prepared sql to insert test dat
+        // run prepared SQL to insert test data
         let sql = include_str!("../fixtures/data.sql").split(';');
         let mut ts = pool.begin().await.expect("begin transaction failed");
         for s in sql {

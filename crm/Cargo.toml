@@ -28,7 +28,7 @@ tonic = { workspace = true }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
 user-stat = { workspace = true }
-uuid = { version = "1.8.0", features = ["v4"] }
+uuid = { version = "1.16.0", features = ["v4"] }
 
 [build-dependencies]
 anyhow = { workspace = true }
